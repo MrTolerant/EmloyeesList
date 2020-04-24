@@ -6,13 +6,10 @@ import ReactDOM from 'react-dom'
 import { AppContainer } from 'react-hot-loader'
 import Root from './config/root'
 
-require('es6-promise').polyfill()
-require('isomorphic-fetch')
-
 const target = document.getElementById('root')
 
 const render = (Component) => {
-  ;(module.hot ? ReactDOM.render : ReactDOM.hydrate)(
+  (module.hot ? ReactDOM.render : ReactDOM.hydrate)(
     <AppContainer>
       <Component />
     </AppContainer>,

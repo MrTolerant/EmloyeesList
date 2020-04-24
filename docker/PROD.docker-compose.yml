@@ -8,8 +8,8 @@ services:
     restart: always
     networks:
       - internal
-    # labels:
-    #   - traefik.enable=false
+    labels:
+      - traefik.enable=false
 
   nginx:
     build:
@@ -23,11 +23,11 @@ services:
     networks:
       - internal
       - review
-    # labels:
-      # - traefik.enable=true
-      # - traefik.frontend.rule=Host:${REVIEW_HOST}
-      # - traefik.port=80
-      # - traefik.docker.network=review
+    labels:
+      - traefik.enable=true
+      - traefik.frontend.rule=Host:${REVIEW_HOST}
+      - traefik.port=80
+      - traefik.docker.network=review
     depends_on:
       - node
 

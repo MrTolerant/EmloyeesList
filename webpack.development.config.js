@@ -33,7 +33,7 @@ const config = {
     hot: true,
     contentBase: path.resolve(__dirname, 'dist/assets'),
     watchContentBase: true,
-    host: '127.0.0.1',
+    host: '0.0.0.0',
     port: 3001,
 
     historyApiFallback: true,
@@ -47,7 +47,7 @@ const config = {
         target: 'http://localhost:3000',
         secure: false,
         changeOrigin: true,
-        ws: true
+        ws: false
       }
     ]
   },
@@ -85,8 +85,7 @@ const config = {
             loader: MiniCssExtractPlugin.loader,
             options: {
               publicPath: '../',
-              hmr: process.env.NODE_ENV === 'development',
-              reloadAll: true
+              hmr: process.env.NODE_ENV === 'development'
             }
           },
           {
@@ -209,12 +208,16 @@ const config = {
       chunkFilename: '[id].css',
       ignoreOrder: false
     }),
-
     new CopyWebpackPlugin([{ from: 'assets/images', to: 'images' }]),
     new CopyWebpackPlugin([{ from: 'assets/fonts', to: 'fonts' }]),
     new CopyWebpackPlugin([{ from: 'index.html', to: 'index.html' }]),
+
+    new CopyWebpackPlugin([{ from: 'vendors', to: 'vendors' }]),
     new CopyWebpackPlugin([{ from: 'assets/manifest.json', to: 'manifest.json' }]),
+    new CopyWebpackPlugin([{ from: 'assets/robots.txt', to: 'robots.txt' }]),
+
     new WebpackShellPlugin({ onBuildStart: ['npm run watch:server'] }),
+
     new webpack.EnvironmentPlugin({
       NODE_ENV: 'development'
     }),
@@ -225,6 +228,7 @@ const config = {
       )
     ),
     new HardSourceWebpackPlugin(),
+
     new webpack.HotModuleReplacementPlugin()
   ]
 }

@@ -202,9 +202,13 @@ const config = {
       chunkFilename: '[id].css',
       ignoreOrder: false
     }),
-
+    new PurgecssPlugin({
+      paths: glob.sync(`${PATHS.src}/**/*`, { nodir: true })
+    }),
     new CopyWebpackPlugin([{ from: 'assets/images', to: 'images' }]),
     new CopyWebpackPlugin([{ from: 'assets/fonts', to: 'fonts' }]),
+
+    new CopyWebpackPlugin([{ from: 'vendors', to: 'vendors' }]),
     new CopyWebpackPlugin([{ from: 'assets/manifest.json', to: 'manifest.json' }]),
     new CopyWebpackPlugin([{ from: 'assets/robots.txt', to: 'robots.txt' }]),
 
