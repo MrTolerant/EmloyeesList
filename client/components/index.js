@@ -5,24 +5,25 @@ import { getUsersList } from '../redux/reducers/UsersList'
 import Head from './head'
 
 const Index = () => {
-  const [checkedUsers, setChechedUsers] = useState([])
+  const [checkedUsers, setCheckedUsers] = useState([])
+  const USERS = useSelector((state) => state.usersList.list)
+  const dispatch = useDispatch()
 
   const handleCheck = (uuid) => {
     const checked = checkedUsers.includes(uuid)
-    setChechedUsers(checked ? checkedUsers.filter((x) => x !== uuid) : [...checkedUsers, uuid])
+    setCheckedUsers(checked ? checkedUsers.filter((x) => x !== uuid) : [...checkedUsers, uuid])
   }
-  const USERS = useSelector((state) => state.usersList.list)
-  const dispatch = useDispatch()
+
+  const checkAll = () => {
+    setCheckedUsers(
+      checkedUsers.length !== USERS.length ? USERS.map((user) => user.login.uuid) : []
+    )
+  }
 
   useEffect(() => {
     dispatch(getUsersList())
   }, [dispatch])
 
-  const checkAll = () => {
-    setChechedUsers(
-      checkedUsers.length !== USERS.length ? USERS.map((user) => user.login.uuid) : []
-    )
-  }
   return (
     <>
       <Head title="Employeers list" />
