@@ -47,6 +47,7 @@ const Index = () => {
                     <input
                       className="mx-auto leading-tight"
                       type="checkbox"
+                      checked={checkedUsers.length === USERS.length}
                       onChange={() => checkAll()}
                     />
                   </th>

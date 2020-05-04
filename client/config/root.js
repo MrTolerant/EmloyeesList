@@ -6,7 +6,7 @@ import { Switch, Route, BrowserRouter as Router } from 'react-router-dom'
 
 import store, { history } from '../redux'
 
-import Index from '../components/Index'
+import Index from '../components/index'
 import NavBar from '../components/NavBar'
 
 import NotFound from '../components/404'
